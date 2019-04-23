@@ -37,18 +37,18 @@ def create_music_list(music_dir):
     title_font = ImageFont.truetype('meiryo.ttc', 104, encoding='utf-8')
     others_font = ImageFont.truetype('meiryo.ttc', 72, encoding='utf-8')
 
-    list_length = len(list(music_dir.iterdir()))
+    file_list = [file_item for file_item in music_dir.iterdir() if file_item.suffix in ['.m4a']]
 
     textarea_max_width = 1024*3
     artwork_size = (384, 384)
     artwork_margin = (25, 25)
     image_bar_size = (25, 384)
     music_item_size = (artwork_size[0]+artwork_margin[0]*4+image_bar_size[0]+textarea_max_width, artwork_size[1]+artwork_margin[1]*2)
-    canvas_size = (music_item_size[0], music_item_size[1]*list_length)
+    canvas_size = (music_item_size[0], music_item_size[1]*len(file_list))
 
     canvas = Image.new('RGB', canvas_size, (255,255,255))
 
-    for i, music_file in enumerate(music_dir.iterdir()):
+    for i, music_file in enumerate(file_list):
         music_item = Image.new('RGB', music_item_size, (255,255,255))
         drawer = ImageDraw.Draw(music_item)
 
