@@ -74,8 +74,15 @@ def create_music_list(music_dir):
         title_size = title_font.getsize(title)
         drawer.text((artwork_size[0]+artwork_margin[0]*3+image_bar_size[0], artwork_margin[1]*2),
                     title, font=title_font, fill='#000')
+        artist_and_album = f'　{artist} / {album}'
+        def check_text_length(font, text, limit):
+            size = font.getsize(text)
+            if limit < size[0]:
+                center = int(len(text) / 2)
+                text = f'{text[:center]}\n　{text[center:]}'
+            return text
         drawer.text((artwork_size[0]+artwork_margin[0]*3+image_bar_size[0], artwork_margin[1]*4+title_size[1]),
-                    f'　{artist} / {album}', font=others_font, fill='#000')
+                    check_text_length(others_font, artist_and_album, textarea_max_width), font=others_font, fill='#000')
 
         canvas.paste(music_item, (0, music_item_size[1]*i))
 
