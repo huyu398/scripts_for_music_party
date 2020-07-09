@@ -53,9 +53,9 @@ def create_music_list(music_dir):
         drawer = ImageDraw.Draw(music_item)
 
         meta_info = MP4(str(music_file))
-        title = meta_info['\xa9nam'][0]
-        artist = meta_info['\xa9ART'][0]
-        album = meta_info['\xa9alb'][0]
+        title = meta_info['\xa9nam'][0] if '\xa9nam' in meta_info.keys() else 'no title'
+        artist = meta_info['\xa9ART'][0] if '\xa9ART' in meta_info.keys() else 'no artist'
+        album = meta_info['\xa9alb'][0] if '\xa9alb' in meta_info.keys() else 'no album'
 
         if 'covr' in meta_info.keys():
             artwork = Image.open(BytesIO(meta_info['covr'][0])).resize(artwork_size, Image.LANCZOS)
