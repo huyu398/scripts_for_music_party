@@ -60,7 +60,7 @@ def create_music_list(music_dir):
         if 'covr' in meta_info.keys():
             artwork = Image.open(BytesIO(meta_info['covr'][0])).resize(artwork_size, Image.LANCZOS)
         else:
-            artwork = Image.open('./resource/no_image.png').resize(artwork_size, Image.LANCZOS)
+            artwork = Image.open('./no_image.png').resize(artwork_size, Image.LANCZOS)
         music_item.paste(artwork, artwork_margin)
 
         # draw image_bar
